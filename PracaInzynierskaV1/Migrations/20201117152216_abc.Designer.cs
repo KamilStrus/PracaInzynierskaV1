@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracaInzynierskaV1.Models;
 
 namespace PracaInzynierskaV1.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    partial class MyDBContextModelSnapshot : ModelSnapshot
+    [Migration("20201117152216_abc")]
+    partial class abc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +33,6 @@ namespace PracaInzynierskaV1.Migrations
 
                     b.Property<byte[]>("image")
                         .HasColumnType("image");
-
-                    b.Property<string>("imageB")
-                        .HasColumnType("varchar(MAX)");
 
                     b.Property<string>("location")
                         .HasColumnType("nvarchar(50)");
