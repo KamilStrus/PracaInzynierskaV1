@@ -28,6 +28,16 @@ namespace PracaInzynierskaV1
             services.AddDbContext<MyDBContext>(options  => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
 
+            //PRZESY£ANIE KLAS JSON PROBA
+           // services.AddControllersWithViews()
+          //  .AddNewtonsoftJson(options =>
+          //  options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+          //  );
+
+           // services.AddControllers().AddNewtonsoftJson(options =>
+           // options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
             services.AddCors();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

@@ -14,6 +14,7 @@ namespace PracaInzynierskaV1.Models
         }
        
         public DbSet<DZguba> DZguby { get; set; }
+        public DbSet<DUser> DUser { get; set; }
 
 
     }

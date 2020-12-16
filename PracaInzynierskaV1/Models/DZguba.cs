@@ -31,9 +31,10 @@ namespace PracaInzynierskaV1.Models
       
         [Column(TypeName = "nvarchar(50)")]
         public String status { get; set; }
-       
 
-
+        //user
+        [ForeignKey("user")]
+        public DUser DUser { get; set; }
 
 
     }

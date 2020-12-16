@@ -10,7 +10,7 @@ using PracaInzynierskaV1.Models;
 namespace PracaInzynierskaV1.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20201118140235_initial")]
+    [Migration("20201216152517_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,16 @@ namespace PracaInzynierskaV1.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.DUser", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("DUser");
+                });
 
             modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba", b =>
                 {
@@ -46,9 +56,21 @@ namespace PracaInzynierskaV1.Migrations
                     b.Property<string>("status")
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("user")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("id");
 
+                    b.HasIndex("user");
+
                     b.ToTable("DZguby");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba", b =>
+                {
+                    b.HasOne("PracaInzynierskaV1.Models.DUser", "DUser")
+                        .WithMany("DZguba")
+                        .HasForeignKey("user");
                 });
 #pragma warning restore 612, 618
         }
