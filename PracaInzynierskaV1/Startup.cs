@@ -40,7 +40,7 @@ namespace PracaInzynierskaV1
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseCors(options => options.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod()); // tu zmiana z localhosta posz³a
+            app.UseCors(options => options.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod()); // https://www.fiwus.com tu zmiana z localhosta posz³a
 
             if (env.IsDevelopment())
             {

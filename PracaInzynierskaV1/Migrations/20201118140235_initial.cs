@@ -16,6 +16,7 @@ namespace PracaInzynierskaV1.Migrations
                     name = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     location = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     image = table.Column<byte[]>(type: "image", nullable: true),
+                    imageB = table.Column<string>(type: "varchar(MAX)", nullable: true),
                     freward = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     status = table.Column<string>(type: "nvarchar(50)", nullable: true)
                 },

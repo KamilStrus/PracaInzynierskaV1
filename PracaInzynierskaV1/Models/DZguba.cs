@@ -22,8 +22,8 @@ namespace PracaInzynierskaV1.Models
         [Column(TypeName = "image")]
         public byte[] image { get; set; }
 
-       [Column(TypeName = "varchar(MAX)")]
-       public String imageB { get; set; }
+        [Column(TypeName = "varchar(MAX)")]
+        public String imageB { get; set; }
 
 
         [Column(TypeName = "nvarchar(50)")]
