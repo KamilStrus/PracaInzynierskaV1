@@ -76,7 +76,10 @@ namespace PracaInzynierskaV1.Controllers
         [HttpPost]
         public async Task<ActionResult<DZguba>> PostDZguba(DZguba dZguba)
         {
+
+            _context.Entry(dZguba.DUser).State = EntityState.Unchanged;
             _context.DZguby.Add(dZguba);
+           
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDZguba", new { id = dZguba.id }, dZguba);

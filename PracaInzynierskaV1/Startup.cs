@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PracaInzynierskaV1.Models;
+using Newtonsoft.Json;
+
 
 namespace PracaInzynierskaV1
 {
@@ -28,15 +30,10 @@ namespace PracaInzynierskaV1
             services.AddDbContext<MyDBContext>(options  => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
 
+            
             //PRZESY£ANIE KLAS JSON PROBA
-           // services.AddControllersWithViews()
-          //  .AddNewtonsoftJson(options =>
-          //  options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-          //  );
-
-           // services.AddControllers().AddNewtonsoftJson(options =>
-           // options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+            services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+          
 
             services.AddCors();
             // In production, the React files will be served from this directory
