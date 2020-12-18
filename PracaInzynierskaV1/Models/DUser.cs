@@ -17,6 +17,7 @@ namespace PracaInzynierskaV1.Models
         public String id { get; set; }
 
         //zguba
+        [Column ("Zguby")]
         public ICollection<DZguba> DZguba { get; set; }
     }
 }

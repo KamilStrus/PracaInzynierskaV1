@@ -33,8 +33,16 @@ namespace PracaInzynierskaV1.Models
         public String status { get; set; }
 
         //user
+        public String user { get; set; }
+        //private string userID;
         [ForeignKey("user")]
         public DUser DUser { get; set; }
+        
+     
+
+       
+
+        
 
 
     }
