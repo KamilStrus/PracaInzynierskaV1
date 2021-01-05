@@ -16,6 +16,12 @@ namespace PracaInzynierskaV1.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public String id { get; set; }
 
+        [Column(TypeName = "image"), NotMapped]
+        public byte[] image { get; set; }
+
+        [Column(TypeName = "varchar(MAX)")]
+        public String imageB { get; set; }
+
         //zguba
         [Column ("Zguby")]
         public ICollection<DZguba> DZguba { get; set; }

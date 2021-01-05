@@ -19,7 +19,7 @@ namespace PracaInzynierskaV1.Models
         [Column(TypeName = "nvarchar(50)")]
         public String location { get; set; }
 
-        [Column(TypeName = "image")]
+        [Column(TypeName = "image"), NotMapped]
         public byte[] image { get; set; }
 
         [Column(TypeName = "varchar(MAX)")]

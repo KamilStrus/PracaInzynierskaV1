@@ -10,8 +10,8 @@ using PracaInzynierskaV1.Models;
 namespace PracaInzynierskaV1.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20201218151055_secound")]
-    partial class secound
+    [Migration("20210105134734_initial2")]
+    partial class initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,9 @@ namespace PracaInzynierskaV1.Migrations
                 {
                     b.Property<string>("id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("imageB")
+                        .HasColumnType("varchar(MAX)");
 
                     b.HasKey("id");
 

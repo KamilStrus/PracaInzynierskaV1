@@ -11,7 +11,8 @@ namespace PracaInzynierskaV1.Migrations
                 name: "DUser",
                 columns: table => new
                 {
-                    id = table.Column<string>(nullable: false)
+                    id = table.Column<string>(nullable: false),
+                    image = table.Column<byte[]>(type: "image", nullable: true)
                 },
                 constraints: table =>
                 {
