@@ -24,6 +24,7 @@ namespace PracaInzynierskaV1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DZguba>>> GetDZguby()
         {
+
             return await _context.DZguby.ToListAsync();
         }
 
