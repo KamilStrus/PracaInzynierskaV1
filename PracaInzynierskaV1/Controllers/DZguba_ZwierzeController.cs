@@ -19,7 +19,6 @@ namespace PracaInzynierskaV1.Controllers
         {
             _context = context;
         }
-
         // GET: api/DZguba_Zwierze
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DZguba_Zwierze>>> GetDZguba_Zwierze()
@@ -46,10 +45,8 @@ namespace PracaInzynierskaV1.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDZguba_Zwierze(int id, DZguba_Zwierze dZguba_Zwierze)
         {
-            if (id != dZguba_Zwierze.id)
-            {
-                return BadRequest();
-            }
+            dZguba_Zwierze.id = id;
+         
 
             _context.Entry(dZguba_Zwierze).State = EntityState.Modified;
 
@@ -78,6 +75,7 @@ namespace PracaInzynierskaV1.Controllers
         [HttpPost]
         public async Task<ActionResult<DZguba_Zwierze>> PostDZguba_Zwierze(DZguba_Zwierze dZguba_Zwierze)
         {
+            _context.Entry(dZguba_Zwierze.DUser).State = EntityState.Unchanged;
             _context.DZguba_Zwierze.Add(dZguba_Zwierze);
             await _context.SaveChangesAsync();
 

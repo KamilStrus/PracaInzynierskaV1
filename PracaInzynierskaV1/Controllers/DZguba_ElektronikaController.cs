@@ -47,10 +47,8 @@ namespace PracaInzynierskaV1.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDZguba_Elektronika(int id, DZguba_Elektronika dZguba_Elektronika)
         {
-            if (id != dZguba_Elektronika.id)
-            {
-                return BadRequest();
-            }
+            dZguba_Elektronika.id = id;
+          
 
             _context.Entry(dZguba_Elektronika).State = EntityState.Modified;
 
@@ -79,6 +77,7 @@ namespace PracaInzynierskaV1.Controllers
         [HttpPost]
         public async Task<ActionResult<DZguba_Elektronika>> PostDZguba_Elektronika(DZguba_Elektronika dZguba_Elektronika)
         {
+            _context.Entry(dZguba_Elektronika.DUser).State = EntityState.Unchanged;
             _context.DZguba_Elektronika.Add(dZguba_Elektronika);
             await _context.SaveChangesAsync();
 
