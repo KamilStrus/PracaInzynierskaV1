@@ -16,13 +16,16 @@ namespace PracaInzynierskaV1.Controllers
     [ApiController]
     public class UtilityController : ControllerBase
     {
+
+        private readonly MyDBContext _context;
         DZguba tmp;
         List<DZguba> InneGet = new List<DZguba>();
         DataTable dt = new DataTable();
         public IConfiguration Configuration { get; }
-        public UtilityController(IConfiguration configuration)
+        public UtilityController(IConfiguration configuration, MyDBContext context)
         {
             Configuration = configuration;
+            _context = context;
         }
 
         // GET: api/Utility
@@ -78,12 +81,24 @@ namespace PracaInzynierskaV1.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
+
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<DZguba>> DeleteDZguba(int id)
         {
+            var dZguba = await _context.DZguby.FindAsync(id);
+            if (dZguba == null)
+            {
+                return NotFound();
+            }
+
+            _context.DZguby.Remove(dZguba);
+            await _context.SaveChangesAsync();
+
+            return dZguba;
         }
     }
 }

@@ -16,6 +16,16 @@ namespace PracaInzynierskaV1.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public String id { get; set; }
 
+
+        [Column(TypeName = "nvarchar(MAX)")]
+        public String name { get; set; }
+
+        [Column(TypeName = "nvarchar(MAX)")]
+        public String surname { get; set; }
+
+        [Column(TypeName = "nvarchar(MAX)")]
+        public String phone { get; set; }
+
         [Column(TypeName = "image"), NotMapped]
         public byte[] image { get; set; }
 

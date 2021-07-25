@@ -26,6 +26,15 @@ namespace PracaInzynierskaV1.Migrations
                     b.Property<string>("imageB")
                         .HasColumnType("varchar(MAX)");
 
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<string>("surname")
+                        .HasColumnType("nvarchar(MAX)");
+
                     b.HasKey("id");
 
                     b.ToTable("DUser");

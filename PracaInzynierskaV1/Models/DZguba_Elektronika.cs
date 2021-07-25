@@ -12,8 +12,6 @@ namespace PracaInzynierskaV1.Models
     public class DZguba_Elektronika : DZguba
 
     {
-        [Key]
-        public int id { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
         public String Rodzaj { get; set; }

@@ -11,6 +11,9 @@ namespace PracaInzynierskaV1.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(MAX)", nullable: true),
+                    surname = table.Column<string>(type: "nvarchar(MAX)", nullable: true),
+                    phone = table.Column<string>(type: "nvarchar(MAX)", nullable: true),
                     imageB = table.Column<string>(type: "varchar(MAX)", nullable: true)
                 },
                 constraints: table =>
