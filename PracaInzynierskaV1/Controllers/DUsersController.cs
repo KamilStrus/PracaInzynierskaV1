@@ -41,6 +41,21 @@ namespace PracaInzynierskaV1.Controllers
             return dUser;
         }
 
+        // GET: api/DUserss/5
+        [HttpGet("byUser/{user}")]
+       
+        public async Task<ActionResult<DUser>> GetDUserByUser(string user)
+        {
+            var dUser = await _context.DUser.FindAsync(user);
+
+            if (dUser == null)
+            {
+                return NotFound();
+            }
+
+            return dUser;
+        }
+
         // PUT: api/DUsers/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

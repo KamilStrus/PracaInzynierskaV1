@@ -63,7 +63,7 @@ namespace PracaInzynierskaV1
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+           
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
