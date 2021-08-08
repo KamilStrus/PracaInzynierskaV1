@@ -9,7 +9,7 @@ using PracaInzynierskaV1.Models;
 namespace PracaInzynierskaV1.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20210725131436_initial")]
+    [Migration("20210801102950_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
