@@ -32,8 +32,16 @@ namespace PracaInzynierskaV1.Models
         [Column(TypeName = "varchar(MAX)")]
         public String imageB { get; set; }
 
+        [Column(TypeName = "int")]
+        public Int64 Points { get; set; }
+
         //zguba
         [Column ("Zguby")]
         public ICollection<DZguba> DZguba { get; set; }
+
+        //nagroda
+        [Column("Nagrody")]
+        public ICollection<DUser_DNagroda> DUser_DNagroda { get; set; }
+
     }
 }

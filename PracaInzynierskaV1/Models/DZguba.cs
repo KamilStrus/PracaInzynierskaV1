@@ -12,10 +12,10 @@ namespace PracaInzynierskaV1.Models
     {
         [Key]
         public int id { get; set; }
-        
+
         [Column(TypeName = "nvarchar(50)")]
         public String name { get; set; }
-        
+
         [Column(TypeName = "nvarchar(50)")]
         public String location { get; set; }
 
@@ -28,7 +28,7 @@ namespace PracaInzynierskaV1.Models
 
         [Column(TypeName = "nvarchar(50)")]
         public String freward { get; set; }
-      
+
         [Column(TypeName = "nvarchar(50)")]
         public String status { get; set; }
 
@@ -37,12 +37,6 @@ namespace PracaInzynierskaV1.Models
         //private string userID;
         [ForeignKey("user")]
         public DUser DUser { get; set; }
-        
-     
-
-       
-
-        
 
 
     }

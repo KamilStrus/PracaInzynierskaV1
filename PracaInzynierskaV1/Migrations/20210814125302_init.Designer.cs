@@ -9,8 +9,8 @@ using PracaInzynierskaV1.Models;
 namespace PracaInzynierskaV1.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20210801102950_initial")]
-    partial class initial
+    [Migration("20210814125302_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,10 +20,38 @@ namespace PracaInzynierskaV1.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("PracaInzynierskaV1.Models.DNagroda", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("cost")
+                        .HasColumnType("int");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<int>("ilosc")
+                        .HasColumnType("int");
+
+                    b.Property<string>("imageB")
+                        .HasColumnType("varchar(MAX)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("DNagroda");
+                });
+
             modelBuilder.Entity("PracaInzynierskaV1.Models.DUser", b =>
                 {
                     b.Property<string>("id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
 
                     b.Property<string>("imageB")
                         .HasColumnType("varchar(MAX)");
@@ -40,6 +68,26 @@ namespace PracaInzynierskaV1.Migrations
                     b.HasKey("id");
 
                     b.ToTable("DUser");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.DUser_DNagroda", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DNagrodaID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DUserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DNagrodaID");
+
+                    b.HasIndex("DUserID");
+
+                    b.ToTable("DUser_DNagroda");
                 });
 
             modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba", b =>
@@ -72,6 +120,28 @@ namespace PracaInzynierskaV1.Migrations
                     b.HasIndex("user");
 
                     b.ToTable("DZguby");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.Email", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("clientemail")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<string>("content")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<bool>("sent")
+                        .HasColumnType("bit");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Email");
                 });
 
             modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba_Elektronika", b =>
@@ -116,6 +186,21 @@ namespace PracaInzynierskaV1.Migrations
                     b.ToTable("DZgubaZwierze");
                 });
 
+            modelBuilder.Entity("PracaInzynierskaV1.Models.DUser_DNagroda", b =>
+                {
+                    b.HasOne("PracaInzynierskaV1.Models.DNagroda", "Nagroda")
+                        .WithMany("DUser_DNagroda")
+                        .HasForeignKey("DNagrodaID");
+
+                    b.HasOne("PracaInzynierskaV1.Models.DUser", "User")
+                        .WithMany("DUser_DNagroda")
+                        .HasForeignKey("DUserID");
+
+                    b.Navigation("Nagroda");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba", b =>
                 {
                     b.HasOne("PracaInzynierskaV1.Models.DUser", "DUser")
@@ -152,8 +237,15 @@ namespace PracaInzynierskaV1.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PracaInzynierskaV1.Models.DNagroda", b =>
+                {
+                    b.Navigation("DUser_DNagroda");
+                });
+
             modelBuilder.Entity("PracaInzynierskaV1.Models.DUser", b =>
                 {
+                    b.Navigation("DUser_DNagroda");
+
                     b.Navigation("DZguba");
                 });
 #pragma warning restore 612, 618
