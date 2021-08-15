@@ -142,7 +142,7 @@ namespace PracaInzynierskaV1.Controllers
                         obj.user = dr["user"].ToString();
                         obj.gatunek = dr["gatunek"].ToString();
                         obj.umaszczenie = dr["umaszczenie"].ToString();
-                       
+                        obj.freward = dr["freward"].ToString();
 
 
                         InneGet.Add(obj);
