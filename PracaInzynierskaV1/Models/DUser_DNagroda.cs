@@ -10,6 +10,7 @@ namespace PracaInzynierskaV1.Models
     public class DUser_DNagroda
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public String Id { get; set; }
 
         public String DUserID { get; set; }

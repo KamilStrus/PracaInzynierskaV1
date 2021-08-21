@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PracaInzynierskaV1.Models;
 
+
 namespace PracaInzynierskaV1.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class DUser_DNagrodaController : ControllerBase
     {
         private readonly MyDBContext _context;
+
+        
 
         public DUser_DNagrodaController(MyDBContext context)
         {
@@ -84,7 +88,7 @@ namespace PracaInzynierskaV1.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
                 if (DUser_DNagrodaExists(dUser_DNagroda.Id))
                 {
@@ -92,7 +96,12 @@ namespace PracaInzynierskaV1.Controllers
                 }
                 else
                 {
-                    throw;
+                    bool willTrue = e.InnerException.Message.Like("%trigger execution%");
+                    String error = e.Message;
+                    if (willTrue)
+                        throw new Exception("Skonczyly sie nagrody");
+                    else
+                        throw;
                 }
             }
 

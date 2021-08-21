@@ -20,6 +20,8 @@ namespace PracaInzynierskaV1.Controllers
         private readonly MyDBContext _context;
         DZguba tmp;
         List<DZguba> InneGet = new List<DZguba>();
+        List<UserRanking> RankingGet = new List<UserRanking>();
+        List<DNagroda> NagrodyGet = new List<DNagroda>();
         DataTable dt = new DataTable();
         public IConfiguration Configuration { get; }
         public UtilityController(IConfiguration configuration, MyDBContext context)
@@ -63,6 +65,76 @@ namespace PracaInzynierskaV1.Controllers
 
             return InneGet;//new string[] { "value1", "value2" };
         }
+
+        // GET: Ranking
+        [HttpGet("Ranking")]
+        public IEnumerable<UserRanking> GetRanking()
+        {
+            String asd = Configuration.GetConnectionString("DevConnection");
+            using (var conn = new SqlConnection(asd))
+            {
+
+
+
+                SqlCommand cmd = new SqlCommand("Ranking", conn);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    UserRanking obj = new UserRanking();
+
+                    obj.rank = Int32.Parse(dr["Rank"].ToString());
+                    obj.name = dr["Name"].ToString();
+                    obj.surname = dr["Surname"].ToString();
+                    obj.points = Int32.Parse(dr["Points"].ToString());
+                    obj.image = dr["ImageB"].ToString();
+                    RankingGet.Add(obj);
+                }
+            }
+
+
+            return RankingGet;//new string[] { "value1", "value2" };
+
+        }
+
+        [HttpGet("NagrodyUser/{IdUser}")]
+        public IEnumerable<DNagroda> GetNagrody(string IdUser)
+        {
+            String asd = Configuration.GetConnectionString("DevConnection");
+            using (var conn = new SqlConnection(asd))
+            {
+                SqlCommand cmd = new SqlCommand("Nagrody_User", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@IdUser", SqlDbType.NVarChar);
+              
+                cmd.Parameters["@IdUser"].Value = IdUser;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DNagroda obj = new DNagroda();
+
+                    obj.id = dr["id"].ToString();
+                    obj.name = dr["Name"].ToString();
+                    obj.description = dr["Description"].ToString();
+                    obj.cost = Int32.Parse(dr["Cost"].ToString());
+                    obj.ilosc = Int32.Parse(dr["Ilosc"].ToString());
+                    obj.imageB = dr["ImageB"].ToString();
+                    NagrodyGet.Add(obj);
+                }
+            }
+
+
+            return NagrodyGet;//new string[] { "value1", "value2" };
+
+        }
+
 
         // GET: api/Utility/5
         [HttpGet("Search/{Category}/{byWhat}/{regex}")]
@@ -192,20 +264,6 @@ namespace PracaInzynierskaV1.Controllers
 
             String test = byWhat + " " + regex + " " + Category;
             return InneGet;
-        }
-
-        // POST: api/Utility
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Utility/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-
-
         }
 
         // DELETE: api/ApiWithActions/5
