@@ -2,7 +2,7 @@
 
 namespace PracaInzynierskaV1.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,6 +51,66 @@ namespace PracaInzynierskaV1.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Email", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Gatunek",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    gatuneknazwa = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gatunek", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MarkaUbranie",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    markaubrania = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MarkaUbranie", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Producents",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    producentnazwa = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Producents", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RodzajElektronika",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    rodzajelektroniki = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RodzajElektronika", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RodzajUbranie",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    rodzajubrania = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RodzajUbranie", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,6 +252,21 @@ namespace PracaInzynierskaV1.Migrations
 
             migrationBuilder.DropTable(
                 name: "Email");
+
+            migrationBuilder.DropTable(
+                name: "Gatunek");
+
+            migrationBuilder.DropTable(
+                name: "MarkaUbranie");
+
+            migrationBuilder.DropTable(
+                name: "Producents");
+
+            migrationBuilder.DropTable(
+                name: "RodzajElektronika");
+
+            migrationBuilder.DropTable(
+                name: "RodzajUbranie");
 
             migrationBuilder.DropTable(
                 name: "DNagroda");

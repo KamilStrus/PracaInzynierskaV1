@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PracaInzynierskaV1.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace PracaInzynierskaV1.Controllers
 {
@@ -14,11 +17,13 @@ namespace PracaInzynierskaV1.Controllers
     public class DZguba_ZwierzeController : ControllerBase
     {
         private readonly MyDBContext _context;
-
-        public DZguba_ZwierzeController(MyDBContext context)
+        public IConfiguration Configuration { get; }
+        public DZguba_ZwierzeController(IConfiguration configuration, MyDBContext context)
         {
             _context = context;
+            Configuration = configuration;
         }
+        // GET: api/DZguba_Zwierze
         // GET: api/DZguba_Zwierze
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DZguba_Zwierze>>> GetDZguba_Zwierze()
@@ -77,6 +82,22 @@ namespace PracaInzynierskaV1.Controllers
         {
             _context.Entry(dZguba_Zwierze.DUser).State = EntityState.Unchanged;
             _context.DZguba_Zwierze.Add(dZguba_Zwierze);
+
+            String asd = Configuration.GetConnectionString("DevConnection");
+            using (var conn = new SqlConnection(asd))
+            using (var command = new SqlCommand("UserPointsAdd", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+
+            })
+            {
+                command.Parameters.Add("@IdUser", SqlDbType.NVarChar);
+                command.Parameters["@IdUser"].Value = dZguba_Zwierze.DUser.id;
+                conn.Open();
+                int rowAffected = command.ExecuteNonQuery();
+                conn.Close();
+            }
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDZguba_Zwierze", new { id = dZguba_Zwierze.id }, dZguba_Zwierze);

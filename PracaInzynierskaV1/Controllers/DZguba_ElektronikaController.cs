@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PracaInzynierskaV1.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace PracaInzynierskaV1.Controllers
 {
@@ -14,9 +17,10 @@ namespace PracaInzynierskaV1.Controllers
     public class DZguba_ElektronikaController : ControllerBase
     {
         private readonly MyDBContext _context;
-
-        public DZguba_ElektronikaController(MyDBContext context)
+        public IConfiguration Configuration { get; }
+        public DZguba_ElektronikaController(IConfiguration configuration, MyDBContext context)
         {
+            Configuration = configuration;
             _context = context;
         }
 
@@ -79,6 +83,22 @@ namespace PracaInzynierskaV1.Controllers
         {
             _context.Entry(dZguba_Elektronika.DUser).State = EntityState.Unchanged;
             _context.DZguba_Elektronika.Add(dZguba_Elektronika);
+
+            String asd = Configuration.GetConnectionString("DevConnection");
+            using (var conn = new SqlConnection(asd))
+            using (var command = new SqlCommand("UserPointsAdd", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+
+            })
+            {
+                command.Parameters.Add("@IdUser", SqlDbType.NVarChar);
+                command.Parameters["@IdUser"].Value = dZguba_Elektronika.DUser.id;
+                conn.Open();
+                int rowAffected = command.ExecuteNonQuery();
+                conn.Close();
+            }
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDZguba_Elektronika", new { id = dZguba_Elektronika.id }, dZguba_Elektronika);

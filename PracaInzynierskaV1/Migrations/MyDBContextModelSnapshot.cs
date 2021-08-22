@@ -71,6 +71,7 @@ namespace PracaInzynierskaV1.Migrations
             modelBuilder.Entity("PracaInzynierskaV1.Models.DUser_DNagroda", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DNagrodaID")
@@ -140,6 +141,71 @@ namespace PracaInzynierskaV1.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Email");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.Gatunek", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("gatuneknazwa")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Gatunek");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.MarkaUbranie", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("markaubrania")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("MarkaUbranie");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.Producents", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("producentnazwa")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Producents");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.RodzajElektronika", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("rodzajelektroniki")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("RodzajElektronika");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.RodzajUbranie", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("rodzajubrania")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("RodzajUbranie");
                 });
 
             modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba_Elektronika", b =>

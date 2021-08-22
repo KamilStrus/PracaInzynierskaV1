@@ -43,6 +43,16 @@ namespace PracaInzynierskaV1.Models
         public DbSet<PracaInzynierskaV1.Models.DUser_DNagroda> DUser_DNagroda { get; set; }
         public DbSet<PracaInzynierskaV1.Models.Email> Email { get; set; }
 
+        public DbSet<PracaInzynierskaV1.Models.Producents> Producents { get; set; }
+
+        public DbSet<PracaInzynierskaV1.Models.Gatunek> Gatunek { get; set; }
+
+        public DbSet<PracaInzynierskaV1.Models.RodzajElektronika> RodzajElektronika { get; set; }
+
+        public DbSet<PracaInzynierskaV1.Models.RodzajUbranie> RodzajUbranie { get; set; }
+
+        public DbSet<PracaInzynierskaV1.Models.MarkaUbranie> MarkaUbranie { get; set; }
+
 
     }
 }
