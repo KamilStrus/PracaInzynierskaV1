@@ -10,7 +10,7 @@ namespace PracaInzynierskaV1.Models
     public class RodzajElektronika
     {
         [Key]
-        public String id { get; set; }
+        public Int64 id { get; set; }
 
         [Column(TypeName = "nvarchar(MAX)")]
         public String rodzajelektroniki { get; set; }

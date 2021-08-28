@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PracaInzynierskaV1.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +58,8 @@ namespace PracaInzynierskaV1.Migrations
                 name: "Gatunek",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     gatuneknazwa = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
                 },
                 constraints: table =>
@@ -69,7 +71,8 @@ namespace PracaInzynierskaV1.Migrations
                 name: "MarkaUbranie",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     markaubrania = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
                 },
                 constraints: table =>
@@ -81,7 +84,8 @@ namespace PracaInzynierskaV1.Migrations
                 name: "Producents",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     producentnazwa = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
                 },
                 constraints: table =>
@@ -93,7 +97,8 @@ namespace PracaInzynierskaV1.Migrations
                 name: "RodzajElektronika",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     rodzajelektroniki = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
                 },
                 constraints: table =>
@@ -105,7 +110,8 @@ namespace PracaInzynierskaV1.Migrations
                 name: "RodzajUbranie",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     rodzajubrania = table.Column<string>(type: "nvarchar(MAX)", nullable: true)
                 },
                 constraints: table =>
@@ -149,6 +155,8 @@ namespace PracaInzynierskaV1.Migrations
                     imageB = table.Column<string>(type: "varchar(MAX)", nullable: true),
                     freward = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     status = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     user = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>

@@ -12,7 +12,7 @@ namespace PracaInzynierskaV1.Models
     {
 
         [Key]
-        public String id { get; set; }
+        public Int64 id { get; set; }
 
         [Column(TypeName = "nvarchar(MAX)")]
         public String rodzajubrania { get; set; }

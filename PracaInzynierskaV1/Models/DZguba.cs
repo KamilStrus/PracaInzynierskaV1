@@ -32,6 +32,10 @@ namespace PracaInzynierskaV1.Models
         [Column(TypeName = "nvarchar(50)")]
         public String status { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
+
+
         //user
         public String user { get; set; }
         //private string userID;

@@ -51,7 +51,7 @@ namespace PracaInzynierskaV1.Controllers
         public async Task<IActionResult> PutDZguba_Zwierze(int id, DZguba_Zwierze dZguba_Zwierze)
         {
             dZguba_Zwierze.id = id;
-         
+            dZguba_Zwierze.UpdatedDate = DateTime.Now;
 
             _context.Entry(dZguba_Zwierze).State = EntityState.Modified;
 
@@ -80,6 +80,11 @@ namespace PracaInzynierskaV1.Controllers
         [HttpPost]
         public async Task<ActionResult<DZguba_Zwierze>> PostDZguba_Zwierze(DZguba_Zwierze dZguba_Zwierze)
         {
+
+
+            dZguba_Zwierze.CreatedDate = DateTime.Now;
+            dZguba_Zwierze.UpdatedDate = DateTime.Now;
+
             _context.Entry(dZguba_Zwierze.DUser).State = EntityState.Unchanged;
             _context.DZguba_Zwierze.Add(dZguba_Zwierze);
 

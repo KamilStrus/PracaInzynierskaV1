@@ -10,7 +10,7 @@ namespace PracaInzynierskaV1.Models
     public class Gatunek
     {
         [Key]
-        public String id { get; set; }
+        public Int64 id { get; set; }
 
         [Column(TypeName = "nvarchar(MAX)")]
         public String gatuneknazwa { get; set; }
