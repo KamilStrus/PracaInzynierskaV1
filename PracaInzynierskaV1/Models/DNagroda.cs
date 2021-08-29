@@ -10,7 +10,7 @@ namespace PracaInzynierskaV1.Models
     public class DNagroda
     {
         [Key]
-      
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public String id { get; set; }
 
         [Column(TypeName = "nvarchar(MAX)")]
