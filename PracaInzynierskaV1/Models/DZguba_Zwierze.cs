@@ -12,15 +12,12 @@ namespace PracaInzynierskaV1.Models
     public class DZguba_Zwierze : DZguba
         
     {
-      
-     
-        [Column(TypeName = "nvarchar(50)")]
-        public String gatunek { get; set; }
-
+          
         [Column(TypeName = "nvarchar(50)")]
         public String umaszczenie { get; set; }
 
-
+        public long GatunekId { get; set; }
+        public Gatunek Gatunek { get; set; }
 
     }
 }

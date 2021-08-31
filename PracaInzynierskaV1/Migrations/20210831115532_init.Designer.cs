@@ -10,7 +10,7 @@ using PracaInzynierskaV1.Models;
 namespace PracaInzynierskaV1.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20210828103830_init")]
+    [Migration("20210831115532_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,7 @@ namespace PracaInzynierskaV1.Migrations
             modelBuilder.Entity("PracaInzynierskaV1.Models.DNagroda", b =>
                 {
                     b.Property<string>("id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("cost")
@@ -231,11 +232,15 @@ namespace PracaInzynierskaV1.Migrations
                 {
                     b.HasBaseType("PracaInzynierskaV1.Models.DZguba");
 
-                    b.Property<string>("Producent")
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<long>("ProducentsId")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("Rodzaj")
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<long>("RodzajElektronikaId")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("ProducentsId");
+
+                    b.HasIndex("RodzajElektronikaId");
 
                     b.ToTable("DZgubaElektronika");
                 });
@@ -247,11 +252,15 @@ namespace PracaInzynierskaV1.Migrations
                     b.Property<string>("Kolor")
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Marka")
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<long>("MarkaUbranieId")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("Rodzaj")
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<long>("RodzajUbranieId")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("MarkaUbranieId");
+
+                    b.HasIndex("RodzajUbranieId");
 
                     b.ToTable("DZgubaUbranie");
                 });
@@ -260,11 +269,13 @@ namespace PracaInzynierskaV1.Migrations
                 {
                     b.HasBaseType("PracaInzynierskaV1.Models.DZguba");
 
-                    b.Property<string>("gatunek")
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<long>("GatunekId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("umaszczenie")
                         .HasColumnType("nvarchar(50)");
+
+                    b.HasIndex("GatunekId");
 
                     b.ToTable("DZgubaZwierze");
                 });
@@ -295,29 +306,69 @@ namespace PracaInzynierskaV1.Migrations
 
             modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba_Elektronika", b =>
                 {
+                    b.HasOne("PracaInzynierskaV1.Models.Producents", "Producents")
+                        .WithMany("DZguby_Elektronika")
+                        .HasForeignKey("ProducentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PracaInzynierskaV1.Models.RodzajElektronika", "RodzajElektronika")
+                        .WithMany("DZguby_Elektronika")
+                        .HasForeignKey("RodzajElektronikaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PracaInzynierskaV1.Models.DZguba", null)
                         .WithOne()
                         .HasForeignKey("PracaInzynierskaV1.Models.DZguba_Elektronika", "id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+
+                    b.Navigation("Producents");
+
+                    b.Navigation("RodzajElektronika");
                 });
 
             modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba_Ubranie", b =>
                 {
+                    b.HasOne("PracaInzynierskaV1.Models.MarkaUbranie", "MarkaUbranie")
+                        .WithMany("DZguby_Ubranie")
+                        .HasForeignKey("MarkaUbranieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PracaInzynierskaV1.Models.RodzajUbranie", "RodzajUbranie")
+                        .WithMany("DZguby_Ubranie")
+                        .HasForeignKey("RodzajUbranieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PracaInzynierskaV1.Models.DZguba", null)
                         .WithOne()
                         .HasForeignKey("PracaInzynierskaV1.Models.DZguba_Ubranie", "id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+
+                    b.Navigation("MarkaUbranie");
+
+                    b.Navigation("RodzajUbranie");
                 });
 
             modelBuilder.Entity("PracaInzynierskaV1.Models.DZguba_Zwierze", b =>
                 {
+                    b.HasOne("PracaInzynierskaV1.Models.Gatunek", "Gatunek")
+                        .WithMany("DZguby_Zwierze")
+                        .HasForeignKey("GatunekId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PracaInzynierskaV1.Models.DZguba", null)
                         .WithOne()
                         .HasForeignKey("PracaInzynierskaV1.Models.DZguba_Zwierze", "id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+
+                    b.Navigation("Gatunek");
                 });
 
             modelBuilder.Entity("PracaInzynierskaV1.Models.DNagroda", b =>
@@ -330,6 +381,31 @@ namespace PracaInzynierskaV1.Migrations
                     b.Navigation("DUser_DNagroda");
 
                     b.Navigation("DZguba");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.Gatunek", b =>
+                {
+                    b.Navigation("DZguby_Zwierze");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.MarkaUbranie", b =>
+                {
+                    b.Navigation("DZguby_Ubranie");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.Producents", b =>
+                {
+                    b.Navigation("DZguby_Elektronika");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.RodzajElektronika", b =>
+                {
+                    b.Navigation("DZguby_Elektronika");
+                });
+
+            modelBuilder.Entity("PracaInzynierskaV1.Models.RodzajUbranie", b =>
+                {
+                    b.Navigation("DZguby_Ubranie");
                 });
 #pragma warning restore 612, 618
         }

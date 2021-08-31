@@ -12,16 +12,17 @@ namespace PracaInzynierskaV1.Models
     public class DZguba_Ubranie : DZguba
 
     {
-       
-
-        [Column(TypeName = "nvarchar(50)")]
-        public String Rodzaj { get; set; }
-
-        [Column(TypeName = "nvarchar(50)")]
-        public String Marka { get; set; }
-
+      
         [Column(TypeName = "nvarchar(50)")]
         public String Kolor { get; set; }
+
+
+
+        public long RodzajUbranieId { get; set; }
+        public RodzajUbranie RodzajUbranie { get; set; }
+
+        public long MarkaUbranieId { get; set; }
+        public MarkaUbranie MarkaUbranie { get; set; }
 
     }
 }

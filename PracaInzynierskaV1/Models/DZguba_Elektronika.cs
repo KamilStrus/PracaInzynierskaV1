@@ -13,11 +13,12 @@ namespace PracaInzynierskaV1.Models
 
     {
 
-        [Column(TypeName = "nvarchar(50)")]
-        public String Rodzaj { get; set; }
 
-        [Column(TypeName = "nvarchar(50)")]
-        public String Producent { get; set; }
+        public long ProducentsId { get; set; }
+        public Producents Producents { get; set; }
+
+        public long RodzajElektronikaId { get; set; }
+        public RodzajElektronika RodzajElektronika { get; set; }
 
     }
 }

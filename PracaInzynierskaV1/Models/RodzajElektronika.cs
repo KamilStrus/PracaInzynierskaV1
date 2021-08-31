@@ -14,5 +14,8 @@ namespace PracaInzynierskaV1.Models
 
         [Column(TypeName = "nvarchar(MAX)")]
         public String rodzajelektroniki { get; set; }
+
+        [Column("DZguba_Elektronika")]
+        public ICollection<DZguba_Elektronika> DZguby_Elektronika { get; set; }
     }
 }

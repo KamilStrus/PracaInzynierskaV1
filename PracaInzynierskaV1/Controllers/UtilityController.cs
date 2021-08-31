@@ -191,8 +191,8 @@ namespace PracaInzynierskaV1.Controllers
                         obj.name = dr["name"].ToString();
                         obj.status = dr["status"].ToString();
                         obj.user = dr["user"].ToString();
-                        obj.Rodzaj = dr["Rodzaj"].ToString();
-                        obj.Marka = dr["Marka"].ToString();
+                        obj.RodzajUbranieId = Int32.Parse(dr["RodzajUbranieId"].ToString());
+                        obj.MarkaUbranieId = Int32.Parse(dr["MarkaUbranieId"].ToString());
                         obj.Kolor = dr["Kolor"].ToString();
 
 
@@ -204,6 +204,7 @@ namespace PracaInzynierskaV1.Controllers
                     foreach (DataRow dr in dt.Rows)
                     {
                         DZguba_Zwierze obj = new DZguba_Zwierze();
+                        Gatunek gatunek = new Gatunek();
 
                         obj.id = Int32.Parse(dr["id"].ToString());
                         obj.image = null; //Encoding.ASCII.GetBytes(dr["image"].ToString());
@@ -211,8 +212,8 @@ namespace PracaInzynierskaV1.Controllers
                         obj.location = dr["location"].ToString();
                         obj.name = dr["name"].ToString();
                         obj.status = dr["status"].ToString();
-                        obj.user = dr["user"].ToString();
-                        obj.gatunek = dr["gatunek"].ToString();
+                        obj.user = dr["user"].ToString();                      
+                        obj.GatunekId = Int32.Parse(dr["GatunekId"].ToString());                     
                         obj.umaszczenie = dr["umaszczenie"].ToString();
                         obj.freward = dr["freward"].ToString();
 
@@ -252,8 +253,8 @@ namespace PracaInzynierskaV1.Controllers
                         obj.status = dr["status"].ToString();
                         obj.user = dr["user"].ToString();
                         obj.freward = dr["freward"].ToString();
-                        obj.Rodzaj = dr["Rodzaj"].ToString();
-                        obj.Producent = dr["Producent"].ToString();
+                        obj.ProducentsId = Int32.Parse(dr["ProducentsId"].ToString());
+                        obj.RodzajElektronikaId = Int32.Parse(dr["RodzajElektronikaId"].ToString());
 
                         InneGet.Add(obj);
                     }

@@ -175,8 +175,8 @@ namespace PracaInzynierskaV1.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false),
-                    Rodzaj = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    Producent = table.Column<string>(type: "nvarchar(50)", nullable: true)
+                    ProducentsId = table.Column<long>(type: "bigint", nullable: false),
+                    RodzajElektronikaId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,6 +187,18 @@ namespace PracaInzynierskaV1.Migrations
                         principalTable: "DZguby",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DZgubaElektronika_Producents_ProducentsId",
+                        column: x => x.ProducentsId,
+                        principalTable: "Producents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DZgubaElektronika_RodzajElektronika_RodzajElektronikaId",
+                        column: x => x.RodzajElektronikaId,
+                        principalTable: "RodzajElektronika",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,9 +206,9 @@ namespace PracaInzynierskaV1.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false),
-                    Rodzaj = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    Marka = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    Kolor = table.Column<string>(type: "nvarchar(50)", nullable: true)
+                    Kolor = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    RodzajUbranieId = table.Column<long>(type: "bigint", nullable: false),
+                    MarkaUbranieId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,6 +219,18 @@ namespace PracaInzynierskaV1.Migrations
                         principalTable: "DZguby",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DZgubaUbranie_MarkaUbranie_MarkaUbranieId",
+                        column: x => x.MarkaUbranieId,
+                        principalTable: "MarkaUbranie",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DZgubaUbranie_RodzajUbranie_RodzajUbranieId",
+                        column: x => x.RodzajUbranieId,
+                        principalTable: "RodzajUbranie",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,8 +238,8 @@ namespace PracaInzynierskaV1.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false),
-                    gatunek = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    umaszczenie = table.Column<string>(type: "nvarchar(50)", nullable: true)
+                    umaszczenie = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    GatunekId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -226,6 +250,12 @@ namespace PracaInzynierskaV1.Migrations
                         principalTable: "DZguby",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DZgubaZwierze_Gatunek_GatunekId",
+                        column: x => x.GatunekId,
+                        principalTable: "Gatunek",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -237,6 +267,31 @@ namespace PracaInzynierskaV1.Migrations
                 name: "IX_DUser_DNagroda_DUserID",
                 table: "DUser_DNagroda",
                 column: "DUserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DZgubaElektronika_ProducentsId",
+                table: "DZgubaElektronika",
+                column: "ProducentsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DZgubaElektronika_RodzajElektronikaId",
+                table: "DZgubaElektronika",
+                column: "RodzajElektronikaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DZgubaUbranie_MarkaUbranieId",
+                table: "DZgubaUbranie",
+                column: "MarkaUbranieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DZgubaUbranie_RodzajUbranieId",
+                table: "DZgubaUbranie",
+                column: "RodzajUbranieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DZgubaZwierze_GatunekId",
+                table: "DZgubaZwierze",
+                column: "GatunekId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DZguby_user",
@@ -262,10 +317,7 @@ namespace PracaInzynierskaV1.Migrations
                 name: "Email");
 
             migrationBuilder.DropTable(
-                name: "Gatunek");
-
-            migrationBuilder.DropTable(
-                name: "MarkaUbranie");
+                name: "DNagroda");
 
             migrationBuilder.DropTable(
                 name: "Producents");
@@ -274,13 +326,16 @@ namespace PracaInzynierskaV1.Migrations
                 name: "RodzajElektronika");
 
             migrationBuilder.DropTable(
+                name: "MarkaUbranie");
+
+            migrationBuilder.DropTable(
                 name: "RodzajUbranie");
 
             migrationBuilder.DropTable(
-                name: "DNagroda");
+                name: "DZguby");
 
             migrationBuilder.DropTable(
-                name: "DZguby");
+                name: "Gatunek");
 
             migrationBuilder.DropTable(
                 name: "DUser");

@@ -14,5 +14,8 @@ namespace PracaInzynierskaV1.Models
 
         [Column(TypeName = "nvarchar(MAX)")]
         public String gatuneknazwa { get; set; }
+
+        [Column("DZguba_Zwierze")]
+        public ICollection<DZguba_Zwierze> DZguby_Zwierze { get; set; }
     }
 }
